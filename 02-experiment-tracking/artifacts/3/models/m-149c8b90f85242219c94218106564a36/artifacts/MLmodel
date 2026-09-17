@@ -1,0 +1,24 @@
+artifact_path: /workspaces/mlops-zoomcamp-course/02-experiment-tracking/artifacts/3/models/m-149c8b90f85242219c94218106564a36/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.14.2
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.9.1
+    skops_trusted_types:
+    - sklearn.tree._tree.Tree
+mlflow_version: 3.16.1
+model_id: m-149c8b90f85242219c94218106564a36
+model_size_bytes: 2629011
+model_uuid: m-149c8b90f85242219c94218106564a36
+prompts: null
+run_id: 921f623bc81e4cbd853ecba421133097
+utc_time_created: '2026-09-17 10:21:52.624411'

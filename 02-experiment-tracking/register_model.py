@@ -14,7 +14,6 @@ RF_PARAMS = ['max_depth', 'n_estimators', 'min_samples_split', 'min_samples_leaf
 
 mlflow.set_tracking_uri("http://127.0.0.1:5000")
 mlflow.set_experiment(EXPERIMENT_NAME)
-mlflow.sklearn.autolog()
 
 
 def load_pickle(filename):
@@ -31,6 +30,7 @@ def train_and_log_model(data_path, params):
         new_params = {}
         for param in RF_PARAMS:
             new_params[param] = int(params[param])
+        new_params["n_jobs"] = 1
 
         rf = RandomForestRegressor(**new_params)
         rf.fit(X_train, y_train)
@@ -40,6 +40,11 @@ def train_and_log_model(data_path, params):
         mlflow.log_metric("val_rmse", val_rmse)
         test_rmse = root_mean_squared_error(y_test, rf.predict(X_test))
         mlflow.log_metric("test_rmse", test_rmse)
+        mlflow.sklearn.log_model(
+            rf,
+            "model",
+            skops_trusted_types=["sklearn.tree._tree.Tree"],
+        )
 
 
 @click.command()
@@ -69,6 +74,7 @@ def run_register_model(data_path: str, top_n: int):
     for run in runs:
         train_and_log_model(data_path=data_path, params=run.data.params)
 
+    # Select the model with the lowest test RMSE
     experiment = client.get_experiment_by_name(EXPERIMENT_NAME)
     best_run = client.search_runs(
         experiment_ids=[experiment.experiment_id],
@@ -77,9 +83,9 @@ def run_register_model(data_path: str, top_n: int):
         max_results=1,
     )[0]
 
+    # Register the best model
     best_test_rmse = best_run.data.metrics["test_rmse"]
     model_uri = f"runs:/{best_run.info.run_id}/model"
-
     mlflow.register_model(
         model_uri=model_uri,
         name="random-forest-best-model",

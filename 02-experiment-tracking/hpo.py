@@ -45,7 +45,7 @@ def run_optimization(data_path: str, num_trials: int):
 
             mlflow.log_metric("rmse", rmse)
 
-            return {"loss": rmse, "status": STATUS_OK}
+        return {'loss': rmse, 'status': STATUS_OK}
 
     search_space = {
         'max_depth': scope.int(hp.quniform('max_depth', 1, 20, 1)),
@@ -56,14 +56,18 @@ def run_optimization(data_path: str, num_trials: int):
     }
 
     rstate = np.random.default_rng(42)  # for reproducible results
+    trials = Trials()
     fmin(
         fn=objective,
         space=search_space,
         algo=tpe.suggest,
         max_evals=num_trials,
-        trials=Trials(),
+        trials=trials,
         rstate=rstate
     )
+
+    best_rmse = min(trial["result"]["loss"] for trial in trials.trials)
+    print(f"Best validation RMSE: {best_rmse:.3f}")
 
 
 if __name__ == '__main__':
