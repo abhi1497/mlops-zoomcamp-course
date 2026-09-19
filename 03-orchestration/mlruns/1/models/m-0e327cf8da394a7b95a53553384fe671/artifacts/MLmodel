@@ -1,0 +1,33 @@
+artifact_path: /workspaces/mlops-zoomcamp-course/03-orchestration/mlruns/1/models/m-0e327cf8da394a7b95a53553384fe671/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.14.2
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.9.1
+    skops_trusted_types: null
+is_signature_from_type_hint: false
+mlflow_version: 3.16.1
+model_id: m-0e327cf8da394a7b95a53553384fe671
+model_size_bytes: 14414
+model_uuid: m-0e327cf8da394a7b95a53553384fe671
+prompts: null
+run_id: 9ef2e5ffccd841d3b1457588a065b576
+saved_input_example_info:
+  artifact_path: input_example.json
+  serving_input_path: serving_input_example.json
+  type: sparse_matrix_csr
+signature:
+  inputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1, 516]}}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-09-19 11:05:07.452038'
