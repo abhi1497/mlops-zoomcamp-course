@@ -18,11 +18,18 @@
 # In[ ]:
 
 
+import argparse
 import os
 import pickle
 import pandas as pd
 import numpy as np
 from sklearn.metrics import root_mean_squared_error
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--year', type=int, required=True)
+parser.add_argument('--month', type=int, required=True)
+args = parser.parse_args()
 
 
 # In[2]:
@@ -45,7 +52,10 @@ def read_data(filename):
 
     return df
 
-df = read_data('https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-03.parquet')
+df = read_data(
+    f'https://d37ci6vzurychx.cloudfront.net/trip-data/'
+    f'yellow_tripdata_{args.year:04d}-{args.month:02d}.parquet'
+)
 
 dicts = df[categorical].to_dict(orient='records')
 X_val = dv.transform(dicts)
@@ -57,7 +67,7 @@ y_pred = model.predict(X_val)
 
 print(f"✅ Standard deviation of predictions: {np.std(y_pred)}")
 # print(f"✅ Standard deviation of predictions: {round(np.std(y_pred), 2)}")
-# print(f"✅ Mean predicted duration: {round(np.mean(y_pred), 2)}")
+print(f"✅ Mean predicted duration: {round(np.mean(y_pred), 2)}")
 # print(f"✅ RMSE: {root_mean_squared_error(df['duration'], y_pred)}")
 
 
@@ -98,8 +108,8 @@ print(f"✅ Standard deviation of predictions: {np.std(y_pred)}")
 # In[ ]:
 
 
-year = 2023
-month = 3
+year = args.year
+month = args.month
 
 df['ride_id'] = f'{year:04d}/{month:02d}_' + df.index.astype('str')
 
@@ -128,8 +138,4 @@ print(f'✅ Output file size: {os.path.getsize(output_file) / 1024 / 1024:.2f} M
 # Which command you need to execute for that?
 # 
 
-# In[ ]:
-
-
-get_ipython().system('jupyter nbconvert --to script starter.ipynb')
 
