@@ -1,0 +1,53 @@
+{
+  "id": "01a105a9-c3c8-7012-b8aa-9a686cf15404",
+  "project_id": "01a105a9-bae4-7ed7-bacd-26874bb086bb",
+  "author_id": "00000000-0000-7000-8000-000000000000",
+  "name": "March 2024 fare amount metrics",
+  "description": "",
+  "data_definition": {
+    "id_column": null,
+    "timestamp": null,
+    "service_columns": null,
+    "numerical_columns": [
+      "fare_amount"
+    ],
+    "categorical_columns": [],
+    "text_columns": [],
+    "datetime_columns": [],
+    "unknown_columns": [],
+    "list_columns": [],
+    "classification": null,
+    "regression": null,
+    "llm": null,
+    "numerical_descriptors": [],
+    "categorical_descriptors": [],
+    "test_descriptors": null,
+    "ranking": null,
+    "special_columns": [],
+    "embeddings": null
+  },
+  "source": {
+    "type": "evidently:data_source:FileDataSource",
+    "filter_by": null,
+    "sort_by": null,
+    "project_id": "01a105a9-bae4-7ed7-bacd-26874bb086bb",
+    "filename": "01a105a9-bae4-7ed7-bacd-26874bb086bb/datasets/01a105a9-c3c8-7012-b8aa-9a686cf15404/March 2024 fare amount metrics.parquet",
+    "is_tmp": false
+  },
+  "size_bytes": 78647,
+  "row_count": 57457,
+  "column_count": 1,
+  "all_columns": [
+    "fare_amount"
+  ],
+  "is_draft": false,
+  "draft_params": null,
+  "origin": "file",
+  "metadata": {},
+  "tags": [],
+  "tracing_params": null,
+  "human_feedback_custom_shortcut_labels": null,
+  "created_at": "2026-10-04T06:46:14.221269",
+  "updated_at": "2026-10-04T06:46:14.221269",
+  "author_name": ""
+}

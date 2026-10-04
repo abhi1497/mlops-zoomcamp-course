@@ -1,0 +1,7 @@
+{
+  "id": "01a105a9-bae4-7ed7-bacd-26874bb086bb",
+  "name": "NYC Taxi Data Quality Project",
+  "description": "Quality control for NYC Taxi data using Evidently AI",
+  "org_id": null,
+  "version": "2"
+}
